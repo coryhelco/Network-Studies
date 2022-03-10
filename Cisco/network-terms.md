@@ -217,6 +217,3 @@ Routing Protocols and more: Routing and Switching are at the heart of most NDE t
 
 
 Past Environments:The interviewer will often want to determine the nature of your last position and the role you played in migrations or day-to-day operations. As such, you may be asked to describe the topology or configuration of the last network you worked on.
-
-
-What does lacp do?
