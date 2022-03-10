@@ -30,5 +30,19 @@
     - Port Priorities Default (32768)
     - Lower Priority is better
     - Switch will also have System Priority
-- Layer 3 Etherchannels
-  - 
+- Etherchannel Config
+  - All interfaces must have same speed and duplex settings and same configuration settings
+      - int range [range of interfaces]
+      - Channel-group 1 mode [active/passive (LACP) or auto/desirable (PAgP)
+  - Optional Etherchannel configs
+    - Designate minimum number of links for the channel to become active
+      - interface port-channel [id]
+      - port-channel min-links [value]
+    - Designate max number of LACP links allowed in bundle
+      - Remaining links placed in hot standby
+      - interface port-channel [id]
+      - lacp max-bundle [1-8]
+  - Etherchannel Monitoring
+    - show run (check that all interfaces in etherchannel match on both switches)
+    - show etherchannel summary
+    - 
