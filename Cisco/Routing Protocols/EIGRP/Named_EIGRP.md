@@ -8,6 +8,9 @@
   - Uses address-families to distinguish v4 and v6
 - Newer Features aren't supported in classic mode
   - E.g. Wide Metrics, IPv6 VRF Lite, etc.
+  - If **show ip eigrp topology [address/32] shows total delay in picoseconds then wide metric is being used
+    - RIB metric would be installed in routing table and not the feasible distance (it's automatic for named process)
+
 
 
 - Configuration
@@ -43,4 +46,11 @@
     - Related to multi-topology routing
     - Kinda like MPLS traffic engineering
     - Can have multiple instances of the routing process
+
+- Converting from classic to named mode
+  - automated as of IOS 15.4S
+  - Supports IPv4/IPv6 EIGRP
+  - Can be in different AS's
+  - Performs graceful restart automatically
+    - Router(config-router)# eigrp upgrade-cli
     - 
