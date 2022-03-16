@@ -1,0 +1,44 @@
+# EIGRP Classic Authentication
+
+- Two types of authentication supported
+  - MD5
+  - HMAC-SHA-256
+
+  - MD5 Authentication
+    - Both classical and Named EIGRP
+    - Uses Key Chains
+    - Supports automatic key rotation
+  - SHA Authentication
+    - Only Named EIGRP
+    - No key chains, no rotation
+  - Key Rotation
+    - Key chain supports multiple key numbers
+      - Router always sends lowest valid key
+    - Key number's validity is based on time
+      - accept-lifetime
+        - When is key valid to be received
+      - send-lifetime
+        - When is key valid to be sent
+    - Automatic rotation by defining different validity times
+      - Implies time must be agreed upon
+      - accept lifetime should overlap in case of mismatch of time
+
+- Classic EIGRP Authentication
+  - Supports MD5 only
+  - Define key chain globally
+    - Whitespace counts as character
+    - Key number must match
+    - Supports automatic key rotation
+  - Configuration
+    - conf t
+      - key chain [name]
+        - key 1
+          - key-string [password]
+      - int [interface]
+        - ip authentication mode eigrp [as] md5
+        - ip authentication key-chain eigrp [as] [key-chain]
+  - Key Rotation Config
+    - 
+  - Validation
+    - show run | sec key
+    - show key chain
