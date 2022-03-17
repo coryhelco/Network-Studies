@@ -38,7 +38,37 @@
         - ip authentication mode eigrp [as] md5
         - ip authentication key-chain eigrp [as] [key-chain]
   - Key Rotation Config
-    - 
+    - key chain INE 
+      - key 1 
+        - key-string ONE 
+          - accept-lifetime 00:00:00 Jan 1 2000 00:07:30 Jan 1 2000 
+          - send-lifetime 00:00:00 Jan 1 2000 00:07:00 Jan 1 2000 
+      - key 2 
+        - key-string TWO 
+          - accept-lifetime 00:06:30 Jan 1 2000 00:10:30 Jan 1 2000 
+          - send-lifetime 00:07:00 Jan 1 2000 00:10:00 Jan 1 2000
+      - key 3 
+        - key-string THREE 
+          - accept-lifetime 00:09:30 Jan 1 2000 infinite 
+          - send-lifetime 00:10:00 Jan 1 2000 infinite
   - Validation
     - show run | sec key
     - show key chain
+
+- Named EIGRP Authentication
+  - Supports MD5 and SHA
+    - MD5 uses same global key chains as classic
+    - SHA uses static key
+  - Defined under af-interface
+    - Can use af-interface default
+    - Specific interface overrides default
+  - Configuration
+    - conf t
+      - key chain [name]
+        - key 1
+          - key-string [password]
+      - router eigrp INE 
+        - address-family ipv4 unicast autonomous-system 200 
+          - af-interface GigabitEthernet0/1 
+            - authentication mode md5 
+            - authentication key-chain INE
