@@ -1,5 +1,13 @@
 ## Static Routes
 
+## Routing Protocols
+
+### Prefix Length 
+- The longest-matching route is preferred first. 
+- Prefix length trumps all other route attributes. 
+- Administrative Distance 
+  - If multiple routes to a destination with the same prefix length exist, the route learned by the protocol with the lowest administrative distance is preferred.
+
 ### Packet routing steps:
 - Routing (First Step)
   - Find the outgoing interface for the packet

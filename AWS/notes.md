@@ -41,6 +41,7 @@ These are the elements outlined in John Gruber’s original design document. All
   - fixing spanning tree root
   - fixing VPC after network went down
   - Configuring networks for k8s environments and customers
+  - Analyzing packet captures
 
 
 

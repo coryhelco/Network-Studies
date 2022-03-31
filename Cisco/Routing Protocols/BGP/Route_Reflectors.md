@@ -33,6 +33,57 @@
 - show ip bgp [prefix/prefix-length]
 - debug ip bgp update
 
+## Peer Policy Template
+### Peer-Session
+- Talking about the session options of TCP
+  - Things like Remote Autonomous System, TTL, MD5 Authentication, etc.
+### Peer-Policy
+- Talking about the Address Family NLRI
+  - Things like Route Reflector configs, Network Statement, Route Map/Routing Policy, etc.
+### Creating the Templates
+```
+router bgp 200
+ template peer-policy RR_CLIENTS
+  route-reflector-client
+ exit-peer-policy
+ !
+ template peer-session iBGP_PEERS
+  remote-as 200
+  update-source Loopback0
+ exit-peer-session
+ router bgp 200
+ neighbor 5.5.5.5 inherit peer-session iBGP_PEERS
+```
+### Applying the templates
+```
+router bgp 200
+ template peer-policy RR_CLIENTS
+  route-reflector-client
+ exit-peer-policy
+ !
+ template peer-session iBGP_PEERS
+  remote-as 200
+  update-source Loopback0
+ exit-peer-session
+ !
+ bgp log-neighbor-changes
+ neighbor 5.5.5.5 inherit peer-session iBGP_PEERS
+ neighbor 6.6.6.6 inherit peer-session iBGP_PEERS
+ neighbor 8.8.8.8 inherit peer-session iBGP_PEERS
+ neighbor 9.9.9.9 inherit peer-session iBGP_PEERS
+ !
+ address-family ipv4
+  neighbor 5.5.5.5 activate
+  neighbor 5.5.5.5 inherit peer-policy RR_CLIENTS
+  neighbor 6.6.6.6 activate
+  neighbor 6.6.6.6 inherit peer-policy RR_CLIENTS
+  neighbor 8.8.8.8 activate
+  neighbor 8.8.8.8 inherit peer-policy RR_CLIENTS
+  neighbor 9.9.9.9 activate
+  neighbor 9.9.9.9 inherit peer-policy RR_CLIENTS
+ exit-address-family
+```
+
 ```
 # Route Reflector Server
 router bgp 100

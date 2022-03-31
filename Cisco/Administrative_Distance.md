@@ -18,3 +18,13 @@
 - Next Hop Resolution Protocol (NHRP)	250
 - Default static route learned via DHCP	254
 - Unknown and unused	255
+
+
+
+## Routing Protocols
+
+### Prefix Length 
+- The longest-matching route is preferred first. 
+- Prefix length trumps all other route attributes. 
+- Administrative Distance 
+  - If multiple routes to a destination with the same prefix length exist, the route learned by the protocol with the lowest administrative distance is preferred.

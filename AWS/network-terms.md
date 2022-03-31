@@ -99,7 +99,13 @@
     - Restconf uses HTTPS for Transport and JSON for encoding (Does support XML)
     - 
 
-## Routing Protocols    
+## Routing Protocols
+
+### Prefix Length 
+- The longest-matching route is preferred first. 
+- Prefix length trumps all other route attributes. 
+- Administrative Distance 
+  - If multiple routes to a destination with the same prefix length exist, the route learned by the protocol with the lowest administrative distance is preferred.
 
 ### Path Selection:
 - RIP selects path by lowest hop count

@@ -42,14 +42,42 @@
   - Different peerings have different next-hop processing rules
 
 
-## iBGP vs EBGP Next-Hop-Processing
-### iBGP Next-Hop Processing
+
+## iBGP Next-Hop Processing
 - By Default:
   - Outbound iBGP updates do not modify the next-hop attribute regardless of iBGP peer type
 - Can be modified:
-  - **neighbor next-hop-self**
-  - route-map action set ip next-hop
-  - As of 15.1(1)SY, **next-hop-self ALL** for inserting RR in the data-path
-    - Used in Unified MPLS design
-### EBGP Next-Hop Processing
-- 
+    - **neighbor next-hop-self**
+    - route-map action set ip next-hop
+    - As of 15.1(1)SY, **next-hop-self ALL** for inserting RR in the data-path
+      - Used in Unified MPLS design
+## iBGP Full Mesh
+- iBGP performs loop prevention via route filtering
+  - iBGP learned routes cannot be advertised on to another iBGP neighbor
+- Implies iBGP requires either:
+  - Fully meshed iBGP peerings
+  - Route Reflectors
+  - Confederation
+
+## Full Mesh Design Advantages
+- Path Diversity
+  - All BGP peers learn all possible egress paths
+- Optimal Traffic Flows
+  - All BGP Peers learn the closest egress path
+  - Path selection by default would be based on IGP metric to egress router
+  - I.e. Hot Potato Routing
+## Full Mesh Design Disadvantages
+- Control Plane Scaling is exponential
+  - Full mesh means n*(n-1)/2 peerings
+  - 10 routers = 45 peerings
+  - 100 routers = 4950 peerings
+  - 500 routers = 124750 peerings
+- Operationally hard to scale
+  - Adding or changing peering config is administratively prohibitive
+  - Could be automated, but few out of the box solutions
+## Partial Mesh Designs
+- You don't need to only choose one design
+  - E.g. full mesh, RR, and Confed can interoperate
+- Why would you do this?
+  - Pockets of full mesh for path diversity
+  - Inter-cluster RR for scaling larger
