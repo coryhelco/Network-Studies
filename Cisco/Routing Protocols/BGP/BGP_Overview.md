@@ -1,6 +1,7 @@
 # BGP Overview
 
 - [RFC 4456 - BGP Route Reflection: An Alternative to Full Mesh Internal BGP](http://tools.ietf.org/html/rfc4456)
+- RFC 4271 Section 9.1 "Decision Process"
 - BGP uses TCP (179) and unicast
 - OSPF/EIGRP use their own protocol
 - Routes vs NLRI
